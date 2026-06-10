@@ -79,8 +79,8 @@ export default function RootLayout({
       <body className="grid-overlay flex min-h-screen flex-col">
         <ThemeProvider
           attribute="class"
-          defaultTheme="dark"
-          enableSystem
+          defaultTheme="light"
+          enableSystem={false}
           disableTransitionOnChange
         >
           <AnimatedBackground />
