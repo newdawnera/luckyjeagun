@@ -6,7 +6,7 @@ export const site = {
   initials: "LJD",
   role: "Software Developer & Data Analyst",
   email: "jeagundaniel@gmail.com",
-  url: "https://your-domain.com",
+  url: "https://luckyjeagun.com",
   /** Path to the downloadable CV, served from public/. */
   cvPath: "/cv.pdf",
   /** Formspree form ID for the contact form. Empty = falls back to a mailto draft. */
