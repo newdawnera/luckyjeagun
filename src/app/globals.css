@@ -1,0 +1,192 @@
+@import "tailwindcss";
+
+/* Class-based dark mode (next-themes adds `.dark` on <html>) */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* ------------------------------------------------------------------ *
+ *  DESIGN TOKENS — neon accents stay vivid, surfaces + text invert.
+ *  Colours stored as raw RGB channels so we can vary opacity freely.
+ * ------------------------------------------------------------------ */
+:root {
+  --neon-violet: 139 92 246;
+  --neon-cyan:   34 211 238;
+  --neon-pink:   236 72 153;
+  --neon-blue:   59 130 246;
+
+  /* Light theme */
+  --bg:            244 245 251;
+  --fg:            17 19 31;
+  --fg-muted:      78 82 102;
+  --glass:         255 255 255;
+  --glass-alpha:   0.55;
+  --glass-border:  255 255 255;
+  --glass-border-alpha: 0.75;
+}
+
+.dark {
+  /* Dark theme */
+  --bg:            7 6 14;
+  --fg:            237 238 248;
+  --fg-muted:      158 162 188;
+  --glass:         255 255 255;
+  --glass-alpha:   0.05;
+  --glass-border:  255 255 255;
+  --glass-border-alpha: 0.12;
+}
+
+/* Expose colour tokens to Tailwind utilities (text-fg, bg-bg, text-neon-violet, …) */
+@theme inline {
+  --color-bg: rgb(var(--bg));
+  --color-fg: rgb(var(--fg));
+  --color-fg-muted: rgb(var(--fg-muted));
+  --color-neon-violet: rgb(var(--neon-violet));
+  --color-neon-cyan: rgb(var(--neon-cyan));
+  --color-neon-pink: rgb(var(--neon-pink));
+  --color-neon-blue: rgb(var(--neon-blue));
+}
+
+* {
+  border-color: rgb(var(--glass-border) / var(--glass-border-alpha));
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  background-color: rgb(var(--bg));
+  color: rgb(var(--fg));
+  font-family: var(--font-sans), system-ui, sans-serif;
+  overflow-x: hidden;
+  transition: background-color 0.5s ease, color 0.5s ease;
+}
+
+.font-mono { font-family: var(--font-mono), ui-monospace, monospace; }
+
+/* ------------------------------------------------------------------ *
+ *  REUSABLE UTILITIES
+ * ------------------------------------------------------------------ */
+
+.glass {
+  background-color: rgb(var(--glass) / var(--glass-alpha));
+  border: 1px solid rgb(var(--glass-border) / var(--glass-border-alpha));
+  backdrop-filter: blur(16px) saturate(150%);
+  -webkit-backdrop-filter: blur(16px) saturate(150%);
+}
+
+.glass-strong {
+  background-color: rgb(var(--glass) / calc(var(--glass-alpha) + 0.07));
+  border: 1px solid rgb(var(--glass-border) / var(--glass-border-alpha));
+  backdrop-filter: blur(28px) saturate(160%);
+  -webkit-backdrop-filter: blur(28px) saturate(160%);
+}
+
+/* Animated neon gradient text */
+.neon-text {
+  background-image: linear-gradient(
+    100deg,
+    rgb(var(--neon-violet)),
+    rgb(var(--neon-pink)) 45%,
+    rgb(var(--neon-cyan))
+  );
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: shimmer 7s linear infinite;
+}
+
+@keyframes shimmer {
+  to { background-position: 200% center; }
+}
+
+/* Glow helpers */
+.glow-violet { box-shadow: 0 0 0 1px rgb(var(--neon-violet) / 0.35), 0 10px 45px -10px rgb(var(--neon-violet) / 0.6); }
+.glow-pink   { box-shadow: 0 0 0 1px rgb(var(--neon-pink) / 0.35),   0 10px 45px -10px rgb(var(--neon-pink) / 0.6); }
+.glow-cyan   { box-shadow: 0 0 0 1px rgb(var(--neon-cyan) / 0.35),   0 10px 45px -10px rgb(var(--neon-cyan) / 0.6); }
+
+/* Gradient border ring (via mask) */
+.gradient-border { position: relative; isolation: isolate; }
+.gradient-border::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(120deg, rgb(var(--neon-violet)), rgb(var(--neon-pink)), rgb(var(--neon-cyan)));
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+          mask-composite: exclude;
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+/* Dotted grid overlay */
+.grid-overlay {
+  background-image: radial-gradient(rgb(var(--fg) / 0.05) 1px, transparent 1px);
+  background-size: 30px 30px;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb {
+  background: rgb(var(--neon-violet) / 0.4);
+  border-radius: 999px;
+  border: 2px solid transparent;
+  background-clip: content-box;
+}
+::-webkit-scrollbar-thumb:hover { background: rgb(var(--neon-violet) / 0.7); background-clip: content-box; }
+
+::selection { background: rgb(var(--neon-pink) / 0.35); color: rgb(var(--fg)); }
+
+/* Entrance helper for non-JS reveals */
+@keyframes float-y {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-12px); }
+}
+.animate-float { animation: float-y 6s ease-in-out infinite; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ------------------------------------------------------------------ *
+ *  3D FLIP CARD
+ * ------------------------------------------------------------------ */
+.flip-perspective { perspective: 1600px; }
+
+.flip-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  transition: transform 0.75s cubic-bezier(0.2, 0.6, 0.2, 1);
+}
+
+/* Flip on hover (desktop), focus (keyboard), or explicit state (touch) */
+.group:hover > .flip-inner,
+.group:focus-within > .flip-inner,
+.flip-inner.is-flipped {
+  transform: rotateY(180deg);
+}
+
+.flip-face {
+  position: absolute;
+  inset: 0;
+  height: 100%;
+  width: 100%;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  border-radius: 1.5rem;
+  overflow: hidden;
+}
+
+.flip-back { transform: rotateY(180deg); }

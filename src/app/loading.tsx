@@ -1,0 +1,12 @@
+export default function Loading() {
+  return (
+    <div className="flex min-h-[60vh] items-center justify-center">
+      <div className="flex flex-col items-center gap-4">
+        <div className="h-10 w-10 animate-spin rounded-full border-2 border-[rgb(var(--glass-border))] border-t-[rgb(var(--neon-violet))]" />
+        <p className="font-mono text-xs uppercase tracking-[0.3em] text-fg-muted">
+          Loading
+        </p>
+      </div>
+    </div>
+  );
+}
