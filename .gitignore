@@ -45,3 +45,6 @@ next-env.d.ts
 .dev.vars
 .wrangler/
 cloudflare-env.d.ts
+
+# lockfile excluded so Cloudflare CI uses npm install (cross-platform safe)
+package-lock.json
