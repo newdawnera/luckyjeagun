@@ -82,6 +82,7 @@ export default function RootLayout({
           defaultTheme="light"
           enableSystem={false}
           disableTransitionOnChange
+          storageKey="theme-v2"
         >
           <AnimatedBackground />
           <Navbar />
