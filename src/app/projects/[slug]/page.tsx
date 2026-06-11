@@ -86,7 +86,9 @@ export default async function ProjectPage({ params }: Params) {
           )}
         >
           <span className="font-mono text-sm uppercase tracking-widest text-fg/80">
-            {project.year} · {project.role}
+            {project.hackathon
+              ? `${project.hackathon} · ${project.role}`
+              : `${project.year} · ${project.role}`}
           </span>
         </div>
       </Reveal>

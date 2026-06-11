@@ -40,11 +40,11 @@ export function Navbar() {
           scrolled ? "glass-strong shadow-lg" : "glass",
         )}
       >
-        <Link href="/" className="group flex items-center gap-2.5">
-          <span className="gradient-border grid h-9 w-9 place-items-center rounded-xl bg-[rgb(var(--neon-violet)/0.15)] font-mono text-sm font-bold text-fg">
+        <Link href="/" className="group flex min-w-0 items-center gap-2.5">
+          <span className="gradient-border grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-[rgb(var(--neon-violet)/0.15)] font-mono text-sm font-bold text-fg">
             {site.initials}
           </span>
-          <span className="text-sm font-semibold tracking-tight text-fg">
+          <span className="truncate text-sm font-semibold tracking-tight text-fg">
             {site.name}
           </span>
         </Link>
@@ -74,7 +74,7 @@ export function Navbar() {
           ))}
         </ul>
 
-        <div className="flex items-center gap-2">
+        <div className="flex shrink-0 items-center gap-2">
           <a
             href={site.cvPath}
             target="_blank"

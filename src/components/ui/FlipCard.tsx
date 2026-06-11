@@ -26,7 +26,7 @@ export function FlipCard({ project }: { project: Project }) {
           />
           <div className="flex items-start justify-between">
             <span className="font-mono text-xs uppercase tracking-widest text-fg/70">
-              {project.year}
+              {project.hackathon ?? project.year}
             </span>
             <button
               type="button"

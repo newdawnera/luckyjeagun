@@ -14,6 +14,8 @@ export type Project = {
   highlights: string[];
   accent: Accent;
   featured?: boolean;
+  /** Set to the event name to list this under Hackathons (e.g. "June Solstice Game Jam 2026"). */
+  hackathon?: string;
   links?: { live?: string; source?: string; demo?: string };
 };
 
@@ -179,6 +181,34 @@ export const projects: Project[] = [
       source: "https://github.com/newdawnera/elite-career",
     },
   },
+  {
+    slug: "the-longest-night",
+    title: "The Longest Night",
+    tagline: "Break four ciphers before sundown",
+    summary:
+      "A solstice codebreaking game where daylight is the resource: crack four ciphers before the sun sets, then face a playable Turing Test powered by Gemini.",
+    overview: [
+      "The Longest Night is my entry for the June Solstice Game Jam 2026 (dev.to). You play the night-shift cryptanalyst at a remote listening station on June 21: four encrypted transmissions must be broken before the sun goes down, and daylight drains in real time — wrong answers and hints cost precious seconds of sun.",
+      "The ciphers rise in difficulty from a Caesar shift through Atbash and Vigenère to a rotor cipher — an Enigma nod. Between levels you talk to C, a colleague on the teletype line who never says what it is; at dawn you answer Turing's question yourself: was C human, or machine?",
+      "C runs on the Gemini API behind an origin-locked, rate-limited Cloudflare Worker proxy, with a bring-your-own-key option and a fully scripted fallback so the game is always playable. A procedural soundtrack dims in tone as daylight fades. The whole game ships as a single static HTML file on GitHub Pages — no build, no dependencies.",
+    ],
+    year: "2026",
+    role: "Solo Developer & Designer",
+    tags: ["Game", "AI", "Hackathon"],
+    tech: ["JavaScript", "Gemini API", "Cloudflare Workers", "GitHub Pages"],
+    highlights: [
+      "Daylight as a real-time resource — mistakes literally cost sunlight",
+      "Four ciphers of rising difficulty: Caesar, Atbash, Vigenère, rotor",
+      "A playable Turing Test: an AI character you must judge at dawn",
+      "Three-tier AI design: secured proxy, bring-your-own-key, scripted fallback",
+    ],
+    accent: "blue",
+    hackathon: "June Solstice Game Jam 2026",
+    links: {
+      live: "https://newdawnera.github.io/solsticegame/",
+      source: "https://github.com/newdawnera/solsticegame",
+    },
+  },
 ];
 
 export function getProject(slug: string): Project | undefined {
@@ -186,3 +216,9 @@ export function getProject(slug: string): Project | undefined {
 }
 
 export const featuredProjects = projects.filter((p) => p.featured);
+
+/** Regular client/personal work shown in the main Projects grid. */
+export const mainProjects = projects.filter((p) => !p.hackathon);
+
+/** Time-boxed event builds shown in the Hackathons section. */
+export const hackathonProjects = projects.filter((p) => p.hackathon);

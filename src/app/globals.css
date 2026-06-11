@@ -83,6 +83,21 @@ body {
   -webkit-backdrop-filter: blur(28px) saturate(160%);
 }
 
+/* Cheaper glass on phones — large backdrop blurs cause scroll jank on
+   low-end mobile GPUs. Slightly higher opacity keeps text legible. */
+@media (max-width: 767px) {
+  .glass {
+    background-color: rgb(var(--glass) / calc(var(--glass-alpha) + 0.08));
+    backdrop-filter: blur(8px) saturate(150%);
+    -webkit-backdrop-filter: blur(8px) saturate(150%);
+  }
+  .glass-strong {
+    background-color: rgb(var(--glass) / calc(var(--glass-alpha) + 0.15));
+    backdrop-filter: blur(12px) saturate(160%);
+    -webkit-backdrop-filter: blur(12px) saturate(160%);
+  }
+}
+
 /* Animated neon gradient text */
 .neon-text {
   background-image: linear-gradient(
