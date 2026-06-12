@@ -4,38 +4,22 @@ My personal portfolio — software development, data analytics, and applied AI/M
 
 **Live:** [luckyjeagun.com](https://luckyjeagun.com)
 
-## Features
+## How it's built
 
-- Multi-page site with routed case studies for each project
-- Glassmorphism/neon design with an animated background and 3D flip cards
-- Dark/light theming (system-aware, with manual toggle)
-- Data Lab page with interactive charts and KPIs
-- Blog with statically generated post pages
-- Contact form (Formspree, AJAX submit with honeypot spam filtering)
-- SEO: generated Open Graph images, sitemap, robots, web manifest
-- Respects `prefers-reduced-motion` for a calmer experience
+I built this as a multi-page Next.js 16 (App Router) site in TypeScript, styled with Tailwind CSS v4 and animated with Motion. Theming is dark/light and system-aware via next-themes, and the design leans glassmorphism/neon with an animated background and 3D flip cards.
 
-## Tech stack
+Each project has its own statically generated case-study page, and blog posts are generated the same way from structured content — adding a post is just adding data, no new wiring. The Data Lab page renders interactive charts and KPIs. The contact form submits to Formspree over AJAX with a honeypot to filter bots. Open Graph and Twitter share images are generated at build time, along with the sitemap, robots and web manifest, and the whole site calms down for visitors with `prefers-reduced-motion` set.
 
-Next.js 16 (App Router) · React 19 · TypeScript · Tailwind CSS v4 · Motion · next-themes
-
-Deployed on Cloudflare Workers via the OpenNext adapter, with Cloudflare Web Analytics.
-
-## Development
+## Running it
 
 ```bash
 npm install
 npm run dev      # http://localhost:3000
 ```
 
-## Deployment
+## Deploying
 
-```bash
-npm run preview  # local preview of the Workers build
-npm run deploy   # build + deploy to Cloudflare Workers
-```
-
-Pushes to `main` also deploy automatically via Cloudflare Workers Builds.
+I host this on Cloudflare Workers through the OpenNext adapter. Pushing to `main` deploys automatically via Workers Builds; `npm run deploy` also works from a Linux shell (the OpenNext bundler currently mangles Windows paths, so I let the CI build handle it). Analytics come from Cloudflare Web Analytics.
 
 ---
 
