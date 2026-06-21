@@ -16,7 +16,7 @@ export type Project = {
   featured?: boolean;
   /** Set to the event name to list this under Hackathons (e.g. "June Solstice Game Jam 2026"). */
   hackathon?: string;
-  links?: { live?: string; source?: string; demo?: string };
+  links?: { live?: string; source?: string; demo?: string; article?: string };
 };
 
 /**
@@ -207,6 +207,9 @@ export const projects: Project[] = [
     links: {
       live: "https://newdawnera.github.io/solsticegame/",
       source: "https://github.com/newdawnera/solsticegame",
+      demo: "https://youtu.be/YigdLxPIdck",
+      article:
+        "https://dev.to/newdawnera/the-longest-night-break-four-ciphers-before-sundown-then-answer-turings-question-57ih",
     },
   },
 ];

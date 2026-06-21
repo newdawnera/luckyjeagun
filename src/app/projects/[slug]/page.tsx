@@ -7,6 +7,7 @@ import {
   ArrowUpRight,
   ExternalLink,
   Play,
+  FileText,
   Check,
 } from "lucide-react";
 import { Github } from "@/components/ui/GithubIcon";
@@ -127,6 +128,17 @@ export default async function ProjectPage({ params }: Params) {
             >
               <Play size={15} />
               Watch demo
+            </a>
+          )}
+          {project.links?.article && (
+            <a
+              href={project.links.article}
+              target="_blank"
+              rel="noreferrer"
+              className="glass inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-sm font-semibold text-fg"
+            >
+              <FileText size={15} />
+              Read the write-up
             </a>
           )}
         </div>
