@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { ArrowUpRight, ExternalLink, RotateCw } from "lucide-react";
+import { ArrowUpRight, ExternalLink, RotateCw, Play, FileText } from "lucide-react";
 import { Github } from "@/components/ui/GithubIcon";
 import type { Project } from "@/lib/projects";
 import { accentMap } from "@/lib/accents";
@@ -91,36 +91,60 @@ export function FlipCard({ project }: { project: Project }) {
             </div>
           </div>
 
-          <div className="flex items-center gap-2">
+          <div className="space-y-2.5">
             <Link
               href={`/projects/${project.slug}`}
-              className="gradient-border inline-flex flex-1 items-center justify-center gap-1.5 rounded-full bg-[rgb(var(--neon-violet)/0.16)] px-4 py-2.5 text-sm font-semibold text-fg transition-shadow hover:glow-violet"
+              className="gradient-border flex w-full items-center justify-center gap-1.5 rounded-full bg-[rgb(var(--neon-violet)/0.16)] px-4 py-2.5 text-sm font-semibold text-fg transition-shadow hover:glow-violet"
             >
               Case study
               <ArrowUpRight size={15} />
             </Link>
-            {project.links?.live && (
-              <a
-                href={project.links.live}
-                target="_blank"
-                rel="noreferrer"
-                aria-label="Live site"
-                className="glass grid h-10 w-10 place-items-center rounded-full text-fg"
-              >
-                <ExternalLink size={15} />
-              </a>
-            )}
-            {project.links?.source && (
-              <a
-                href={project.links.source}
-                target="_blank"
-                rel="noreferrer"
-                aria-label="Source code"
-                className="glass grid h-10 w-10 place-items-center rounded-full text-fg"
-              >
-                <Github size={15} />
-              </a>
-            )}
+            <div className="flex flex-wrap items-center gap-2">
+              {project.links?.live && (
+                <a
+                  href={project.links.live}
+                  target="_blank"
+                  rel="noreferrer"
+                  aria-label="Live site"
+                  className="glass grid h-10 w-10 place-items-center rounded-full text-fg"
+                >
+                  <ExternalLink size={15} />
+                </a>
+              )}
+              {project.links?.source && (
+                <a
+                  href={project.links.source}
+                  target="_blank"
+                  rel="noreferrer"
+                  aria-label="Source code"
+                  className="glass grid h-10 w-10 place-items-center rounded-full text-fg"
+                >
+                  <Github size={15} />
+                </a>
+              )}
+              {project.links?.demo && (
+                <a
+                  href={project.links.demo}
+                  target="_blank"
+                  rel="noreferrer"
+                  aria-label="Watch demo"
+                  className="glass grid h-10 w-10 place-items-center rounded-full text-fg"
+                >
+                  <Play size={15} />
+                </a>
+              )}
+              {project.links?.article && (
+                <a
+                  href={project.links.article}
+                  target="_blank"
+                  rel="noreferrer"
+                  aria-label="Read the write-up"
+                  className="glass grid h-10 w-10 place-items-center rounded-full text-fg"
+                >
+                  <FileText size={15} />
+                </a>
+              )}
+            </div>
           </div>
         </div>
       </div>
